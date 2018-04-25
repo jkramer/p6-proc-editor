@@ -12,8 +12,6 @@ Proc::Editor - Start a text editor
   my $text = edit('original text');
   say "Edited text: {$text.trim}";
 
-  my Proc::Editor.=new(:editors<some custom editors>)
-
 =head1 DESCRIPTION
 
 Proc::Editor runs a text editor and returns the edited text.
@@ -84,8 +82,6 @@ class Proc::Editor:ver<0.0.1> {
     LEAVE {
       $temporary-file.unlink unless $keep;
     }
-
-    say "TEXT[$text]" if $text.defined;
 
     $temporary-file.spurt($text) if $text.defined;
 
