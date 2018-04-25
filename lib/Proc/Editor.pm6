@@ -16,9 +16,31 @@ Proc::Editor - Start a text editor
 
 Proc::Editor runs a text editor and returns the edited text.
 
+=head1 ROUTINES
+
+=head2 C<edit(...)>
+
+This is merely a shortcut for convenience, all arguments are passed on to
+C<Proc::Editor.new.edit(...)>.
+
 =head1 METHODS
 
-TODO
+=head2 C<new(:editors(...))>
+
+Create a new instance of C<Proc::Editor>. C<:editors> may be used to override
+the default list of editors to try.
+
+=head2 C<edit(Str $text?, IO::Path :$file, Bool :$keep)>
+
+Writes C<$text> to a temporary file runs an editor with that file as argument.
+On success, the contents of the file are returned. If C<$file> is defined, it
+is used instead of creating a temporary file. The file used (temporary or not)
+are deleted afterwards unless C<:keep> is provided.
+
+=head2 C<edit-file(IO::Path $path)>
+
+Starts an editor with the given C<$path> as argument. Returns the editors
+exit-code on success (which should always be 0) or dies on error.
 
 =head1 AUTHOR
 
@@ -40,6 +62,7 @@ class Proc::Editor:ver<0.0.1> {
     |<vim vi nano emacs>
   ).grep(*.defined);
 
+  # TODO: Check if the file already exists and if so, try other paths.
   method temporary-file(--> IO::Path) {
     $*TMPDIR.add(('edit', $*PID, $.WHERE, now.Rat, 10000.rand.Int).join('-'))
   }
