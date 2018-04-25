@@ -57,7 +57,7 @@ the Artistic License 2.0.
 
 =end pod
 
-class Proc::Editor:ver<0.0.1> {
+class Proc::Editor:ver<0.0.2> {
   has @.editors = (
     %*ENV<VISUAL>,
     %*ENV<EDITOR>,
