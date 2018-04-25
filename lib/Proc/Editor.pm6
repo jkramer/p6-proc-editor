@@ -28,7 +28,9 @@ C<Proc::Editor.new.edit(...)>.
 =head2 C<new(:editors(...))>
 
 Create a new instance of C<Proc::Editor>. C<:editors> may be used to override
-the default list of editors to try.
+the default list of editors to try. By default, the environment variables
+$VISUAL and $EDITOR are checked, then it tries /usr/bin/vi, /bin/vi and /bin/ed
+(in that order).
 
 =head2 C<edit(Str $text?, IO::Path :$file, Bool :$keep)>
 
@@ -70,7 +72,7 @@ class Proc::Editor:ver<0.0.1> {
   method edit-file(IO::Path:D $path) {
     my $exitcode;
 
-    for @.editors -> $editor {
+    for @.editors.grep: { .e && .f && .x with .IO } -> $editor {
       my $proc = Proc::Async.new: $editor, $path.absolute;
 
       react {
