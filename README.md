@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/jkramer/p6-proc-editor.svg?branch=master)](https://travis-ci.org/jkramer/p6-proc-editor)
+
 NAME
 ====
 
