@@ -59,7 +59,7 @@ class Proc::Editor:ver<0.0.1> {
   has @.editors = (
     %*ENV<VISUAL>,
     %*ENV<EDITOR>,
-    |<vim vi nano emacs>
+    |</usr/bin/vi /bin/vi /bin/ed>
   ).grep(*.defined);
 
   # TODO: Check if the file already exists and if so, try other paths.
